@@ -1,46 +1,56 @@
 # PayPilot AI – Smart Payment Assistant
 
-PayPilot AI is an AI-powered smart payment assistant that helps users understand online payments, transactions, refunds, and basic financial concepts.
+PayPilot AI is an AI-powered smart payment assistant that helps users understand payment statuses, explore transactions, and get clear answers to payment-related questions.
+
+It combines Gemini AI with PayPal Sandbox checkout to provide an interactive payment assistance experience.
 
 ## Features
 
-- **AI Payment Assistant:** Uses Google Gemini AI to answer payment-related questions.
-- **PayPal Sandbox Checkout:** Demonstrates online payments using PayPal Sandbox.
-- **Transaction History:** Displays payment transaction details and status.
-- **Payment Dashboard:** Provides an overview of payment activity.
-- **AI Responses:** Supports structured responses with headings and bullet points.
-- **Payment Education:** Explains concepts such as pending payments, completed payments, and refunds.
+- **AI Payment Assistant:** Ask payment-related questions and receive AI-generated explanations using Gemini.
+- **PayPal Sandbox Checkout:** Test payments securely using PayPal Sandbox.
+- **Transaction Dashboard:** View payment information and transaction history.
+- **Payment Status Guidance:** Understand pending, completed, and other payment statuses.
+- **Markdown Responses:** Get clear, structured answers from the AI assistant.
 
 ## Tech Stack
 
 **Frontend**
-- React.js
+- React
 - Vite
 - JavaScript
-- Tailwind CSS
 - React Markdown
 
 **Backend**
 - Python
 - FastAPI
+- Pydantic
 - HTTPX
 
-**AI Integration**
+**AI and Payments**
 - Google Gemini API
-
-**Payment Integration**
-- PayPal Sandbox API
+- PayPal REST API (Sandbox)
 
 ## Project Structure
 
 ```text
 paypilot-ai/
+│
 ├── backend/
 │   ├── main.py
-│   └── .env
+│   ├── requirements.txt
+│   ├── .env.example
+│   └── .gitignore
+│
 ├── frontend/
 │   ├── src/
-│   └── package.json
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── PayPalCheckout.jsx
+│   │   └── main.jsx
+│   ├── public/
+│   ├── package.json
+│   └── package-lock.json
+│
 ├── .gitignore
 └── README.md
 ```
@@ -50,68 +60,124 @@ paypilot-ai/
 ### 1. Clone the Repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/divyanagasai2006/paypilot-ai.git
 cd paypilot-ai
 ```
 
-### 2. Backend Setup
+### 2. Set Up the Backend
+
+Open a terminal:
 
 ```bash
 cd backend
 python -m venv venv
 ```
 
-Activate the virtual environment on Windows:
+Activate the virtual environment.
+
+**Windows PowerShell:**
 
 ```powershell
 .\venv\Scripts\Activate.ps1
 ```
 
-Install the backend dependencies using the project's dependency file.
+Install dependencies:
 
-Configure your PayPal Sandbox and Gemini API credentials in `backend/.env`. Never share or upload API secrets.
+```bash
+pip install -r requirements.txt
+```
 
-Start the backend:
+### 3. Configure Environment Variables
+
+Create a `.env` file inside the `backend` folder using `.env.example` as a template.
+
+**Windows PowerShell:**
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Add your own API credentials to `backend/.env`:
+
+```env
+PAYPAL_CLIENT_ID=your_paypal_sandbox_client_id
+PAYPAL_CLIENT_SECRET=your_paypal_sandbox_client_secret
+PAYPAL_BASE_URL=https://api-m.sandbox.paypal.com
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+Use your own credentials. Never upload your actual `.env` file or expose API secrets publicly.
+
+### 4. Run the Backend
+
+From the `backend` folder:
 
 ```bash
 python -m uvicorn main:app --reload --port 8000
 ```
 
-Backend URL: `http://127.0.0.1:8000`
+Backend API:
 
-API documentation: `http://127.0.0.1:8000/docs`
+```text
+http://localhost:8000
+```
 
-### 3. Frontend Setup
+Interactive API documentation:
 
-Open another terminal:
+```text
+http://localhost:8000/docs
+```
+
+### 5. Set Up the Frontend
+
+Open a second terminal:
 
 ```bash
 cd frontend
 npm install
+```
+
+### 6. Run the Frontend
+
+```bash
 npm run dev
 ```
 
-Open the local URL displayed by Vite in your browser.
+Open the local URL displayed by Vite, usually:
+
+```text
+http://localhost:5173
+```
+
+Keep both backend and frontend terminals running while using the application.
 
 ## Testing
 
-- Tested Gemini AI responses through the frontend and backend.
-- Tested PayPal Sandbox checkout.
-- Successfully completed a $5.00 USD Sandbox transaction.
-- Verified the completed transaction in the dashboard.
+The project was tested with:
 
-**Note:** This project uses PayPal Sandbox for demonstration and testing. It does not connect to real bank accounts or process live payments.
+- Backend API endpoints using FastAPI Swagger documentation.
+- Gemini AI chat responses.
+- PayPal Sandbox checkout.
+- A successful $5.00 USD Sandbox payment.
+- Dashboard transaction display.
+- Frontend production build.
+
+**Note:** PayPal Sandbox is used for testing. This project does not process real payments.
 
 ## Security
 
 - API credentials are stored in environment variables.
-- `.env`, virtual environments, and `node_modules` are excluded using `.gitignore`.
-- Never commit API keys or private credentials.
+- The actual `.env` file is excluded from Git.
+- `.env.example` contains placeholder values only.
+- PayPal Sandbox is used for payment testing.
 
 ## Author
 
-**Divya Chinnimalli**
+**Chinnimalli Divya**
 
-GitHub: https://github.com/divyanagasai2006
+- GitHub: https://github.com/divyanagasai2006
+- LinkedIn: https://linkedin.com/in/chinnimalli-divya-402067393/
 
-LinkedIn: https://linkedin.com/in/chinnimalli-divya-402067393/
+## Repository
+
+https://github.com/divyanagasai2006/paypilot-ai
